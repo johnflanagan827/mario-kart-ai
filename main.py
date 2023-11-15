@@ -10,6 +10,7 @@ from collections import namedtuple
 import numpy as np
 import math
 import os
+import time as t
 
 # =================================== DUELING DQN NETWORK =======================================
 
@@ -142,6 +143,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         state = s.recv(1024).decode('utf-8')
         percent, time, velocity = [float(x) for x in state.strip('()').split(',')]
         while True:
+
+            t.sleep(0.01)
             state_tensor = torch.FloatTensor([percent, time]).to(device)
 
             if random.random() < epsilon:
